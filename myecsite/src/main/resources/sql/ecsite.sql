@@ -27,6 +27,9 @@ VALUES ('Tシャツ', 1000);
 INSERT INTO product
 (product_name, price)
 VALUES ('ジャケット', 5000);
+INSERT INTO product
+(product_name, price)
+VALUES ('スニーカー', 5000);
 
 CREATE TABLE purchase (
 	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
