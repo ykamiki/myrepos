@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Register</title>
+<title>Welcome</title>
 </head>
 <body>
 
-	<p th:text="${message}" />
-	
-	<input type="text" th:value="${message}" />
+	<p th:text="${userForm.userName}" />
+	<p th:text="${userForm.password}" />
 
 </body>
 </html>
