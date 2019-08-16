@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>ECサイト</title>
+
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/common.js" th:src="@{/js/common.js}"></script>
+<script src="/js/Cart.js" th:src="@{/js/Cart.js}"></script>
+<script>
+let cartList = [];
+
+$(() => {
+	$('#loginForm').on('submit', login);
+	
+	$('.cartBtn').on('click', addCart);
+});
+</script>
+</head>
+<body>
+
+<header>
+	<h1>My EC Site</h1>
+	<div>
+		<form name="loginForm" id="loginForm" method="post" action="#">
+			User name:<input type="text" name="userName" />
+			Password :<input type="password" name="password" />
+			<button type="submit">Login</button>
+		</form>
+		<br />
+		<span id="welcome"> -- ようこそ！ ゲスト さん</span>
+	</div>
+</header>
+
+<table>
+	<thead>
+		<tr>
+			<th>ID</th><th>商品名</th><th>価格</th><th>注文数</th><th>カート</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="product: ${products}">
+			<td th:text="${product.id}" />
+			<td th:text="${product.productName}" />
+			<td th:text="${product.price}" />
+			<td><input type="number" class="count" value="0"/></td>
+			<td><button class="cartBtn">カートに入れる</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<fieldset>
+	<legend>カート</legend>
+	<table id="cart">
+		<thead>
+			<tr>
+				<th>ID</th><th>商品名</th><th>価格</th><th>注文数</th><th>カート</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	<button id="buyBtn">購入</button>
+</fieldset>
+
+</body>
+</html>
