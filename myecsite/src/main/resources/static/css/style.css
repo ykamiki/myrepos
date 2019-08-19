@@ -86,3 +86,26 @@ table#cart thead tr th {
 	background: #c0c0c0 !important;
 	color: black;
 }
+
+table#historyTable thead tr th:nth-child(1) {
+	width: 150px;
+}
+table#historyTable thead tr th:nth-child(2) {
+	width: 65px;
+}
+table#historyTable thead tr th:nth-child(3) {
+	width: 250px;
+}
+table#historyTable tbody tr td:nth-child(1) {
+	padding: 0 5px;
+	text-align: left;
+}
+table#historyTable tbody tr td:nth-child(2) {
+	padding: 0 5px;
+	text-align: right;
+}
+table#historyTable tbody tr td:nth-child(3) {
+	padding: 0 5px;
+	text-align: left;
+}
+

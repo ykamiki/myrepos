@@ -5,19 +5,61 @@
 <title>ECサイト</title>
 
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="/js/common.js" th:src="@{/js/common.js}"></script>
-<script src="/js/Cart.js" th:src="@{/js/Cart.js}"></script>
 <script>
 let cartList = [];
 
 $(() => {
 	$('#loginForm').on('submit', login);
-	
 	$('.cartBtn').on('click', addCart);
+	$('#buyBtn').on('click', buy);
+	
+	$("#history").dialog({
+		autoOpen: false,
+	    width: 550,
+	    modal: true,
+	    buttons: [
+	      {
+	        text: 'OK',
+	        click: function() {
+	        	$(this).dialog("close");
+	        }
+	      },
+	    ]
+	});
+	 
+	$("#historyBtn").on('click', () => {
+		$.ajax({
+			type: 'POST',
+			url: '/myecsite/api/history',
+			data: JSON.stringify({ "userId": $('#hiddenUserId').val() }),
+			contentType: 'application/json',
+			datatype: 'json',
+			scriptCharset: 'utf-8'
+		})
+		.then((result) => {
+				let historyList = JSON.parse(result);
+				console.log(historyList);
+				let tbody = $('#historyTable').find('tbody');
+			  	$(tbody).children().remove();
+			  	historyList.forEach(function(history, index) {
+			  		let tr = $('<tr />');
+			  		
+			  		$('<td />', { 'text': history.productName }).appendTo(tr);
+			  		$('<td />', { 'text': history.count }).appendTo(tr);
+			  		$('<td />', { 'text': history.createdAt }).appendTo(tr);
+
+			  		$(tr).appendTo(tbody);
+			  	});
+		    }, () => {
+				console.error('Error: ajax connection failed.');
+		    }
+		);
+		$("#history").dialog("open");
+	});
 });
 </script>
 </head>
@@ -33,6 +75,7 @@ $(() => {
 		</form>
 		<br />
 		<span id="welcome"> -- ようこそ！ ゲスト さん</span>
+		<input type="hidden" id="hiddenUserId" value="0" />
 	</div>
 </header>
 
@@ -66,7 +109,20 @@ $(() => {
 		</tbody>
 	</table>
 	<button id="buyBtn">購入</button>
+	<button id="historyBtn">履歴</button>
 </fieldset>
 
+<div id="history" title="購入履歴">
+	<table id="historyTable">
+		<thead>
+			<tr>
+				<th>商品名</th><th>注文数</th><th>購入日時</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
 </body>
 </html>

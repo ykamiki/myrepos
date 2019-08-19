@@ -13,8 +13,11 @@ let login = (event) => {
 		scriptCharset: 'utf-8'
 	})
 	.then((result) => {
-	      let user = JSON.parse(result);
-	      $('#welcome').text(` -- ようこそ！ ${user.fullName} さん`);
+			let user = JSON.parse(result);
+			$('#welcome').text(` -- ようこそ！ ${user.fullName} さん`);
+			$('#hiddenUserId').val(user.id);
+			$('input[name=userName]').val('');
+			$('input[name=password]').val('');
 	    }, () => {
 	      console.error('Error: ajax connection failed.');
 	    }
@@ -29,7 +32,18 @@ let addCart = (event) => {
 	let price = $(tdList[2]).text();
 	let count = $(tdList[3]).find('input').val();
 	
-	let cart = new Cart(id, productName, price, count);
+	if (count === '0' || count === '') {
+		alert('注文数が０または空欄です。')
+		return;
+	}
+	
+	//let cart = new Cart(id, productName, price, count);
+	let cart = {
+		'id': id,
+		'productName': productName,
+		'price': price,
+		'count': count
+	};
 	cartList.push(cart);
 	
 	let tbody = $('#cart').find('tbody');
@@ -62,3 +76,24 @@ let removeCart = (event) => {
 	});
 	$(event.target).parent().parent().remove();
 };
+
+let buy = (event) => {
+	$.ajax({
+		type: 'POST',
+		url: '/myecsite/api/purchase',
+		data: JSON.stringify({
+			"userId": $('#hiddenUserId').val(),
+			"cartList": cartList
+		}),
+		contentType: 'application/json',
+		datatype: 'json',
+		scriptCharset: 'utf-8'
+	})
+	.then((result) => {
+	      alert('購入しました。');
+	    }, () => {
+	      console.error('Error: ajax connection failed.');
+	    }
+	);
+};
+
