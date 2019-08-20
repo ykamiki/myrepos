@@ -27,7 +27,7 @@ $(() => {
 		})
 		.then((result) => {
 				console.log(result);
-				alert(`商品${jsonString.goodsName}を削除しました。`);
+				alert(`商品 [ ${jsonString.goodsName} ] を削除しました。`);
 				$(tdList).parent().remove();
 		    }, () => {
 		    	console.error('Error: ajax connection failed.');
@@ -62,9 +62,10 @@ $(() => {
 	</tbody>
 </table>
 <form name="goodsForm" id="adminPage" method="post"
-	 action="/myecsite/admin/addGoods" th:action="@{/myecsite/admin/addGoods}">
-	<button type="submit">新規追加</button>
-	<input type="hidden" name="userId" th:value="${userId}" />
+	 action="/myecsite/admin/goodsMst" th:action="@{/myecsite/admin/goodsMst}">
+	<button type="submit" th:if="${userName != null}">新規追加</button>
+	<input type="hidden" name="userName" th:value="${userName}" />
+	<input type="hidden" name="password" th:value="${password}" />
 </form>
 
 </body>

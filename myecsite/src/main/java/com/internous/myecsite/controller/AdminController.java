@@ -8,13 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.internous.myecsite.model.dao.GoodsRepository;
 import com.internous.myecsite.model.dao.UserRepository;
-import com.internous.myecsite.model.dto.LoginDto;
 import com.internous.myecsite.model.entity.Goods;
 import com.internous.myecsite.model.entity.User;
 import com.internous.myecsite.model.form.GoodsForm;
@@ -30,8 +27,6 @@ public class AdminController {
 	@Autowired
 	private UserRepository userRepos;
 	
-	private Gson gson = new Gson();
-	
 	@RequestMapping("/")
 	public String index() {
 		return "adminindex";
@@ -45,7 +40,8 @@ public class AdminController {
 			boolean isAdmin = users.get(0).getIsAdmin() != 0;
 			if (isAdmin) {
 				List<Goods> goods = goodsRepos.findAll();
-				m.addAttribute("userId", users.get(0).getId());
+				m.addAttribute("userName", users.get(0).getUserName());
+				m.addAttribute("password", users.get(0).getPassword());
 				m.addAttribute("goods", goods);
 			}
 		}
@@ -54,11 +50,24 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/goodsMst")
-	public String goodsMst(Model m) {
-		List<Goods> goods = goodsRepos.findAll();
-		m.addAttribute("goods", goods);
+	public String goodsMst(LoginForm form, Model m) {
+		m.addAttribute("userName", form.getUserName());
+		m.addAttribute("password", form.getPassword());
 		
 		return "goodsmst";
+	}
+	
+	@RequestMapping("/addGoods")
+	public String addGoods(GoodsForm goodsForm, LoginForm loginForm, Model m) {
+		m.addAttribute("userName", loginForm.getUserName());
+		m.addAttribute("password", loginForm.getPassword());
+		
+		Goods goods = new Goods();
+		goods.setGoodsName(goodsForm.getGoodsName());
+		goods.setPrice(goodsForm.getPrice());
+		goodsRepos.saveAndFlush(goods);
+		
+		return "forward:/myecsite/admin/welcome";
 	}
 	
 	@ResponseBody
