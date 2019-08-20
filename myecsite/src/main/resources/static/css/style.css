@@ -109,3 +109,36 @@ table#historyTable tbody tr td:nth-child(3) {
 	text-align: left;
 }
 
+#adminPage {
+	margin: 0 30px;
+}
+
+table#adminTable thead tr th:nth-child(1) {
+	width: 50px;
+}
+table#adminTable thead tr th:nth-child(2) {
+	width: 150px;
+}
+table#adminTable thead tr th:nth-child(3) {
+	width: 100px;
+}
+table#adminTable thead tr th:nth-child(4) {
+	width: 80px;
+}
+
+table#adminTable tbody tr td:nth-child(1) {
+	padding: 0 5px;
+	text-align: right;
+}
+table#adminTable tbody tr td:nth-child(2) {
+	padding: 0 5px;
+	text-align: left;
+}
+table#adminTable tbody tr td:nth-child(3) {
+	padding: 0 5px;
+	text-align: right;
+}
+table#adminTable tbody tr td:nth-child(4) {
+	text-align: center;
+}
+

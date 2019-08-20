@@ -1,5 +1,7 @@
 package com.internous.myecsite.model.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,20 +21,21 @@ public class Purchase {
 	@Column(name="user_id")
 	private long userId;
 	
-	@Column(name="product_id")
-	private long productId;
+	@Column(name="goods_id")
+	private long goodsId;
 	
-	@Column(name="product_name")
-	private String productName;
+	@Column(name="goods_name")
+	private String goodsName;
 	
-	@Column(name="count")
-	private long count;
+	@Column(name="item_count")
+	private long itemCount;
 	
 	@Column(name="total")
 	private long total;
 	
 	@Column(name="created_at")
-	private String createdAt;
+//	private String createdAt;
+	private Date createdAt;
 
 	public long getId() {
 		return id;
@@ -50,28 +53,28 @@ public class Purchase {
 		this.userId = userId;
 	}
 
-	public long getProductId() {
-		return productId;
+	public long getGoodsId() {
+		return goodsId;
 	}
 
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setGoodsId(long goodsId) {
+		this.goodsId = goodsId;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getGoodsName() {
+		return goodsName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
 
-	public long getCount() {
-		return count;
+	public long getItemCount() {
+		return itemCount;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
+	public void setItemCount(long itemCount) {
+		this.itemCount = itemCount;
 	}
 
 	public long getTotal() {
@@ -82,11 +85,19 @@ public class Purchase {
 		this.total = total;
 	}
 
-	public String getCreatedAt() {
+//	public String getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(String createdAt) {
+//		this.createdAt = createdAt;
+//	}
+	
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	

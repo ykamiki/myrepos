@@ -48,7 +48,7 @@ $(() => {
 			  	historyList.forEach(function(history, index) {
 			  		let tr = $('<tr />');
 			  		
-			  		$('<td />', { 'text': history.productName }).appendTo(tr);
+			  		$('<td />', { 'text': history.goodsName }).appendTo(tr);
 			  		$('<td />', { 'text': history.count }).appendTo(tr);
 			  		$('<td />', { 'text': history.createdAt }).appendTo(tr);
 
@@ -86,10 +86,10 @@ $(() => {
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="product: ${products}">
-			<td th:text="${product.id}" />
-			<td th:text="${product.productName}" />
-			<td th:text="${product.price}" />
+		<tr th:each="item: ${goods}">
+			<td th:text="${item.id}" />
+			<td th:text="${item.goodsName}" />
+			<td th:text="${item.price}" />
 			<td><input type="number" class="count" value="0"/></td>
 			<td><button class="cartBtn">カートに入れる</button></td>
 		</tr>

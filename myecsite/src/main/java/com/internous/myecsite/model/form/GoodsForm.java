@@ -2,13 +2,12 @@ package com.internous.myecsite.model.form;
 
 import java.io.Serializable;
 
-public class Cart implements Serializable {
+public class GoodsForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
 	private String goodsName;
 	private long price;
-	private long count;
 	
 	public long getId() {
 		return id;
@@ -27,12 +26,6 @@ public class Cart implements Serializable {
 	}
 	public void setPrice(long price) {
 		this.price = price;
-	}
-	public long getCount() {
-		return count;
-	}
-	public void setCount(long count) {
-		this.count = count;
 	}
 	
 }

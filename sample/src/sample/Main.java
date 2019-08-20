@@ -3,7 +3,13 @@ package sample;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("aaa\\nbbb");
+		boolean flag = false;
+		
+		if (flag = true) {
+			System.out.println("trueです。");
+		} else {
+			System.out.println("falseです。");
+		}
 	}
 
 }

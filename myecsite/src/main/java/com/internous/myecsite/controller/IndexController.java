@@ -1,7 +1,5 @@
 package com.internous.myecsite.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.internous.myecsite.model.dao.ProductRepository;
+import com.internous.myecsite.model.dao.GoodsRepository;
 import com.internous.myecsite.model.dao.PurchaseRepository;
 import com.internous.myecsite.model.dao.UserRepository;
 import com.internous.myecsite.model.dto.LoginDto;
-import com.internous.myecsite.model.entity.Product;
+import com.internous.myecsite.model.entity.Goods;
 import com.internous.myecsite.model.entity.Purchase;
 import com.internous.myecsite.model.entity.User;
 import com.internous.myecsite.model.form.CartForm;
@@ -29,7 +27,7 @@ import com.internous.myecsite.model.form.LoginForm;
 public class IndexController {
 	
 	@Autowired
-	private ProductRepository productRepos;
+	private GoodsRepository goodsRepos;
 	
 	@Autowired
 	private UserRepository userRepos;
@@ -41,13 +39,8 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(Model m) {
-		
-		User user = new User();
-		user.setFullName("TestTaro");
-		m.addAttribute("user", user);
-		
-		List<Product> products = productRepos.findAll();
-		m.addAttribute("products", products);
+		List<Goods> goods = goodsRepos.findAll();
+		m.addAttribute("goods", goods);
 		
 		return "index";
 	}
@@ -66,23 +59,14 @@ public class IndexController {
 	
 	@ResponseBody
 	@PostMapping("/api/purchase")
-	public String purchaseApi(@RequestBody CartForm form) {
+	public String purchaseApi(@RequestBody CartForm f) {
 		
-		form.getCartList().forEach((cart) -> {
-			Purchase p = new Purchase();
-			p.setUserId(form.getUserId());
-			p.setProductId(cart.getId());
-			p.setProductName(cart.getProductName());
-			p.setCount(cart.getCount());
-			p.setTotal(cart.getPrice() * cart.getCount());
-			
-			String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
-			p.setCreatedAt(now);
-			
-			purchaseRepos.saveAndFlush(p);
+		f.getCartList().forEach((c) -> {
+			long total = c.getPrice() * c.getCount();
+			purchaseRepos.persist(f.getUserId(), c.getId(), c.getGoodsName(), c.getCount(), total);
 		});
 		
-		return String.valueOf(form.getCartList().size());
+		return String.valueOf(f.getCartList().size());
 	}
 	
 	@ResponseBody

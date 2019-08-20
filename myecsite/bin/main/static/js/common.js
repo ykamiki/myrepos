@@ -28,7 +28,7 @@ let addCart = (event) => {
 	let tdList = $(event.target).parent().parent().find('td');
 	
 	let id = $(tdList[0]).text();
-	let productName = $(tdList[1]).text();
+	let goodsName = $(tdList[1]).text();
 	let price = $(tdList[2]).text();
 	let count = $(tdList[3]).find('input').val();
 	
@@ -37,10 +37,10 @@ let addCart = (event) => {
 		return;
 	}
 	
-	//let cart = new Cart(id, productName, price, count);
+	//let cart = new Cart(id, goodsName, price, count);
 	let cart = {
 		'id': id,
-		'productName': productName,
+		'goodsName': goodsName,
 		'price': price,
 		'count': count
 	};
@@ -52,7 +52,7 @@ let addCart = (event) => {
 		let tr = $('<tr />');
 		
 		$('<td />', { 'text': cart.id }).appendTo(tr);
-		$('<td />', { 'text': cart.productName }).appendTo(tr);
+		$('<td />', { 'text': cart.goodsName }).appendTo(tr);
 		$('<td />', { 'text': cart.price }).appendTo(tr);
 		$('<td />', { 'text': cart.count }).appendTo(tr);
 		let tdButton = $('<td />');

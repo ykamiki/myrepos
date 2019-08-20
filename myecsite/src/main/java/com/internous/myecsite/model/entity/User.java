@@ -24,6 +24,9 @@ public class User {
 	
 	@Column(name="full_name")
 	private String fullName;
+	
+	@Column(name="isAdmin")
+	private int isAdmin;
 
 	public long getId() {
 		return id;
@@ -55,6 +58,14 @@ public class User {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	
 }
