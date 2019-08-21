@@ -72,7 +72,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/api/deleteGoods")
-	public String loginApi(@RequestBody GoodsForm f, Model m) {
+	public String deleteApi(@RequestBody GoodsForm f, Model m) {
 		try {
 			goodsRepos.deleteById(f.getId());
 		} catch (IllegalArgumentException e) {
