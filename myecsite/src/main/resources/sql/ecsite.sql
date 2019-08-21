@@ -25,7 +25,8 @@ VALUES ('admin', 'admin', '管理者　太郎', 1);
 CREATE TABLE IF NOT EXISTS goods (
     id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     goods_name VARCHAR(255) NOT NULL,
-    price INT(11) DEFAULT 0
+    price INT(11) DEFAULT 0,
+    updated_at TIMESTAMP NOT NULL DEFAULT now() ON UPDATE now()
 );
 
 INSERT INTO goods

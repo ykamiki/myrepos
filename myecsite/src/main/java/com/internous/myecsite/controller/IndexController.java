@@ -1,5 +1,8 @@
 package com.internous.myecsite.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import com.google.gson.Gson;
 import com.internous.myecsite.model.dao.GoodsRepository;
 import com.internous.myecsite.model.dao.PurchaseRepository;
 import com.internous.myecsite.model.dao.UserRepository;
+import com.internous.myecsite.model.dto.HistoryDto;
 import com.internous.myecsite.model.dto.LoginDto;
 import com.internous.myecsite.model.entity.Goods;
 import com.internous.myecsite.model.entity.Purchase;
@@ -74,8 +78,13 @@ public class IndexController {
 	public String historyApi(@RequestBody HistoryForm form) {
 		String userId = form.getUserId();
 		List<Purchase> history = purchaseRepos.findHistory(Long.parseLong(userId));
+		List<HistoryDto> historyDtoList = new ArrayList<>();
+		history.forEach((v) -> {
+			HistoryDto dto = new HistoryDto(v);
+			historyDtoList.add(dto);
+		});
 
-		return gson.toJson(history);
+		return gson.toJson(historyDtoList);
 	}
 
 }
