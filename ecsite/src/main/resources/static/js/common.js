@@ -6,7 +6,7 @@ let login = (event) => {
 	};
 	$.ajax({
 		type: 'POST',
-		url: '/myecsite/api/login',
+		url: '/ecsite/api/login',
 		data: JSON.stringify(jsonString),
 		contentType: 'application/json',
 		datatype: 'json',
@@ -67,19 +67,10 @@ let addCart = (event) => {
 	
 };
 
-let removeCart = (event) => {
-	const tdList = $(event.target).parent().parent().find('td');
-	let id = $(tdList[0]).text();
-	cartList = cartList.filter(function(cart) {
-		return cart.id !== id;
-	});
-	$(event.target).parent().parent().remove();
-};
-
 let buy = (event) => {
 	$.ajax({
 		type: 'POST',
-		url: '/myecsite/api/purchase',
+		url: '/ecsite/api/purchase',
 		data: JSON.stringify({
 			"userId": $('#hiddenUserId').val(),
 			"cartList": cartList
@@ -96,10 +87,19 @@ let buy = (event) => {
 	);
 };
 
+let removeCart = (event) => {
+	const tdList = $(event.target).parent().parent().find('td');
+	let id = $(tdList[0]).text();
+	cartList = cartList.filter(function(cart) {
+		return cart.id !== id;
+	});
+	$(event.target).parent().parent().remove();
+};
+
 let showHistory = () => {
 	$.ajax({
 		type: 'POST',
-		url: '/myecsite/api/history',
+		url: '/ecsite/api/history',
 		data: JSON.stringify({ "userId": $('#hiddenUserId').val() }),
 		contentType: 'application/json',
 		datatype: 'json',
@@ -109,7 +109,7 @@ let showHistory = () => {
 			let historyList = JSON.parse(result);
 			let tbody = $('#historyTable').find('tbody');
 		  	$(tbody).children().remove();
-		  	historyList.forEach(function(history, index) {
+		  	historyList.forEach((history, index) => {
 		  		let tr = $('<tr />');
 		  		
 		  		$('<td />', { 'text': history.goodsName }).appendTo(tr);
@@ -124,4 +124,9 @@ let showHistory = () => {
 	    }
 	);
 }
+
+
+
+
+
 

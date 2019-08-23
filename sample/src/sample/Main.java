@@ -3,13 +3,13 @@ package sample;
 public class Main {
 
 	public static void main(String[] args) {
-		boolean flag = false;
+		int[] nums = {2, 1, 5, 3, 4};
+		int maxNum = 0;
 		
-		if (flag = true) {
-			System.out.println("trueです。");
-		} else {
-			System.out.println("falseです。");
+		for (int num: nums) {
+			maxNum = Math.max(maxNum, num);
 		}
+		System.out.println(maxNum);
 	}
 
 }

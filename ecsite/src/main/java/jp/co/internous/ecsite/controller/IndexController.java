@@ -1,4 +1,4 @@
-package com.internous.myecsite.controller;
+package jp.co.internous.ecsite.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,27 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.internous.myecsite.model.dao.GoodsRepository;
-import com.internous.myecsite.model.dao.PurchaseRepository;
-import com.internous.myecsite.model.dao.UserRepository;
-import com.internous.myecsite.model.dto.HistoryDto;
-import com.internous.myecsite.model.dto.LoginDto;
-import com.internous.myecsite.model.entity.Goods;
-import com.internous.myecsite.model.entity.Purchase;
-import com.internous.myecsite.model.entity.User;
-import com.internous.myecsite.model.form.CartForm;
-import com.internous.myecsite.model.form.HistoryForm;
-import com.internous.myecsite.model.form.LoginForm;
+
+import jp.co.internous.ecsite.model.dao.GoodsRepository;
+import jp.co.internous.ecsite.model.dao.PurchaseRepository;
+import jp.co.internous.ecsite.model.dao.UserRepository;
+import jp.co.internous.ecsite.model.dto.HistoryDto;
+import jp.co.internous.ecsite.model.dto.LoginDto;
+import jp.co.internous.ecsite.model.entity.Goods;
+import jp.co.internous.ecsite.model.entity.Purchase;
+import jp.co.internous.ecsite.model.entity.User;
+import jp.co.internous.ecsite.model.form.CartForm;
+import jp.co.internous.ecsite.model.form.HistoryForm;
+import jp.co.internous.ecsite.model.form.LoginForm;
 
 @Controller
-@RequestMapping("/myecsite")
+@RequestMapping("/ecsite")
 public class IndexController {
 	
 	@Autowired
-	private GoodsRepository goodsRepos;
+	private UserRepository userRepos;
 	
 	@Autowired
-	private UserRepository userRepos;
+	private GoodsRepository goodsRepos;
 	
 	@Autowired
 	private PurchaseRepository purchaseRepos;

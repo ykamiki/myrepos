@@ -37,7 +37,6 @@ let addCart = (event) => {
 		return;
 	}
 	
-	//let cart = new Cart(id, goodsName, price, count);
 	let cart = {
 		'id': id,
 		'goodsName': goodsName,
@@ -96,4 +95,33 @@ let buy = (event) => {
 	    }
 	);
 };
+
+let showHistory = () => {
+	$.ajax({
+		type: 'POST',
+		url: '/myecsite/api/history',
+		data: JSON.stringify({ "userId": $('#hiddenUserId').val() }),
+		contentType: 'application/json',
+		datatype: 'json',
+		scriptCharset: 'utf-8'
+	})
+	.then((result) => {
+			let historyList = JSON.parse(result);
+			let tbody = $('#historyTable').find('tbody');
+		  	$(tbody).children().remove();
+		  	historyList.forEach(function(history, index) {
+		  		let tr = $('<tr />');
+		  		
+		  		$('<td />', { 'text': history.goodsName }).appendTo(tr);
+		  		$('<td />', { 'text': history.itemCount }).appendTo(tr);
+		  		$('<td />', { 'text': history.createdAt }).appendTo(tr);
+
+		  		$(tr).appendTo(tbody);
+		  	});
+		  	$("#history").dialog("open");
+	    }, () => {
+			console.error('Error: ajax connection failed.');
+	    }
+	);
+}
 

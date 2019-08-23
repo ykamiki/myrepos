@@ -16,6 +16,7 @@ $(() => {
 	$('#loginForm').on('submit', login);
 	$('.cartBtn').on('click', addCart);
 	$('#buyBtn').on('click', buy);
+	$("#historyBtn").on('click', showHistory);
 	
 	$("#history").dialog({
 		autoOpen: false,
@@ -29,36 +30,6 @@ $(() => {
 	        }
 	      },
 	    ]
-	});
-	 
-	$("#historyBtn").on('click', () => {
-		$.ajax({
-			type: 'POST',
-			url: '/myecsite/api/history',
-			data: JSON.stringify({ "userId": $('#hiddenUserId').val() }),
-			contentType: 'application/json',
-			datatype: 'json',
-			scriptCharset: 'utf-8'
-		})
-		.then((result) => {
-				let historyList = JSON.parse(result);
-				console.log(historyList);
-				let tbody = $('#historyTable').find('tbody');
-			  	$(tbody).children().remove();
-			  	historyList.forEach(function(history, index) {
-			  		let tr = $('<tr />');
-			  		
-			  		$('<td />', { 'text': history.goodsName }).appendTo(tr);
-			  		$('<td />', { 'text': history.itemCount }).appendTo(tr);
-			  		$('<td />', { 'text': history.createdAt }).appendTo(tr);
-
-			  		$(tr).appendTo(tbody);
-			  	});
-		    }, () => {
-				console.error('Error: ajax connection failed.');
-		    }
-		);
-		$("#history").dialog("open");
 	});
 });
 </script>
@@ -112,7 +83,7 @@ $(() => {
 	<button id="historyBtn">履歴</button>
 </fieldset>
 
-<div id="history" title="購入履歴">
+<div id="history" title="購入履歴" style="display:none;">
 	<table id="historyTable">
 		<thead>
 			<tr>
