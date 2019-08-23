@@ -33,7 +33,7 @@ public class HistoryDto {
 		this.total = entity.getTotal();
 		
 		Timestamp d = entity.getCreatedAt();
-		SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		this.createdAt = f.format(d);
 	}
 

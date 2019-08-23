@@ -29,7 +29,7 @@ public class AdminController {
 	private GoodsRepository goodsRepos;
 	
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model m) {
 		return "adminindex";
 	}
 	
@@ -37,14 +37,17 @@ public class AdminController {
 	public String welcome(LoginForm form, Model m) {
 		List<User> users = userRepos.findByUserNameAndPassword(form.getUserName(), form.getPassword());
 		
-		if (users != null && users.size() > 0) {
-			boolean isAdmin = users.get(0).getIsAdmin() != 0;
-			if (isAdmin) {
-				List<Goods> goods = goodsRepos.findAll();
-				m.addAttribute("userName", users.get(0).getUserName());
-				m.addAttribute("password", users.get(0).getPassword());
-				m.addAttribute("goods", goods);
-			}
+		if (users == null || users.size() == 0) {
+			m.addAttribute("errMessage", "User name、またはPasswordが違います。");
+			return "forward:/ecsite/admin/";
+		}
+		
+		boolean isAdmin = users.get(0).getIsAdmin() != 0;
+		if (isAdmin) {
+			List<Goods> goods = goodsRepos.findAll();
+			m.addAttribute("userName", users.get(0).getUserName());
+			m.addAttribute("password", users.get(0).getPassword());
+			m.addAttribute("goods", goods);
 		}
 		
 		return "welcome";

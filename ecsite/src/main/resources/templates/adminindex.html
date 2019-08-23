@@ -19,6 +19,10 @@
 		<p>Password :<input type="password" name="password" /></p>
 		<button type="submit">Login</button>
 	</form>
+	
+	<p th:if="${errMessage != null}">
+		<span th:text="${errMessage}" style="color:red;"></span>
+	</p>
 </div>
 
 </body>

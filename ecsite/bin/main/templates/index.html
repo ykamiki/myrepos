@@ -15,7 +15,10 @@ let cartList = [];
 $(() => {
 	$('#loginForm').on('submit', login);
 	$('.cartBtn').on('click', addCart);
-	$('#buyBtn').on('click', buy);
+	$('#buyBtn').on('click', (event) => {
+		buy(event);
+		cartList = [];
+	});
 	$("#historyBtn").on('click', showHistory);
 	
 	$("#history").dialog({
@@ -49,7 +52,7 @@ $(() => {
 	</div>
 </header>
 
-<table>
+<table id="goodsListTable">
 	<thead>
 		<tr>
 			<th>ID</th><th>商品名</th><th>価格</th><th>注文数</th><th>カート</th>

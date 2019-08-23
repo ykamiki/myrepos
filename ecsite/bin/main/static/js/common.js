@@ -81,6 +81,10 @@ let buy = (event) => {
 	})
 	.then((result) => {
 	      alert('購入しました。');
+	      $('#goodsListTable tbody').find('tr').find('td').each((i, v) => {
+	    	  $(v).find('input').val(0);
+	      });
+	      $('#cart').find('tbody').find('tr').remove();
 	    }, () => {
 	      console.error('Error: ajax connection failed.');
 	    }
