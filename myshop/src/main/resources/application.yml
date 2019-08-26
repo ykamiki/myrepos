@@ -1,0 +1,8 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/myshop?serverTimezone=JST
+    username: root
+    password: mysql
+    #driver-class-name: com.mysql.jdbc.Driver
