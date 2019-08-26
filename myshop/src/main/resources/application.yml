@@ -5,4 +5,14 @@ spring:
     url: jdbc:mysql://localhost:3306/myshop?serverTimezone=JST
     username: root
     password: mysql
-    #driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+logging:
+  level:
+    org:
+      springframework: WARN
+    jp.co.internous.myshop.model.mapper: DEBUG

@@ -19,4 +19,6 @@ public class Purchase {
 	
 	private Timestamp createdAt;
 	
+//	private Goods goods;
+	
 }

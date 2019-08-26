@@ -1,6 +1,7 @@
 package jp.co.internous.myshop.model.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,5 +15,7 @@ public class Goods {
 	private long price;
 	
 	private Timestamp updatedAt;
+	
+	private List<Purchase> purchaseList;
 	
 }
