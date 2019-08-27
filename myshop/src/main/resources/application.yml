@@ -7,7 +7,7 @@ spring:
     password: mysql
 
 mybatis:
-  mapperLocations: classpath*:/mapper/*.xml
+  #mapperLocations: classpath*:/mapper/*.xml
   configuration:
     mapUnderscoreToCamelCase: true
 

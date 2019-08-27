@@ -7,7 +7,6 @@ spring:
     password: mysql
 
 mybatis:
-  #mapperLocations: classpath*:/mapper/*.xml
   configuration:
     mapUnderscoreToCamelCase: true
 
@@ -15,4 +14,4 @@ logging:
   level:
     org:
       springframework: WARN
-    jp.co.internous.myshop.model.mapper: DEBUG
+    jp.co.internous.practice.model.mapper: DEBUG

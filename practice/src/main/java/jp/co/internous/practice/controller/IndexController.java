@@ -1,4 +1,4 @@
-package jp.co.internous.myshop.controller;
+package jp.co.internous.practice.controller;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import jp.co.internous.myshop.model.domain.Goods;
-import jp.co.internous.myshop.model.domain.Purchase;
-import jp.co.internous.myshop.model.domain.User;
-import jp.co.internous.myshop.model.domain.dto.HistoryDto;
-import jp.co.internous.myshop.model.form.HistoryForm;
-import jp.co.internous.myshop.model.form.PurchaseForm;
-import jp.co.internous.myshop.model.mapper.GoodsMapper;
-import jp.co.internous.myshop.model.mapper.PurchaseMapper;
-import jp.co.internous.myshop.model.mapper.UserMapper;
+import jp.co.internous.practice.model.domain.Goods;
+import jp.co.internous.practice.model.domain.Purchase;
+import jp.co.internous.practice.model.domain.User;
+import jp.co.internous.practice.model.domain.dto.HistoryDto;
+import jp.co.internous.practice.model.form.HistoryForm;
+import jp.co.internous.practice.model.form.PurchaseForm;
+import jp.co.internous.practice.model.mapper.GoodsMapper;
+import jp.co.internous.practice.model.mapper.PurchaseMapper;
+import jp.co.internous.practice.model.mapper.UserMapper;
 
 @Controller
 @RequestMapping("/myshop")
@@ -77,13 +77,6 @@ public class IndexController {
 	public String historyApi(@RequestBody HistoryForm form) {
 		String userId = form.getUserId();
 		List<HistoryDto> history = purchaseMapper.findHistory(userId);
-		
-//		List<HistoryDto> history = new ArrayList<>();
-//		List<Goods> goodsList = purchaseMapper.findHistory2(userId);
-//		goodsList.forEach( goods -> {
-//			HistoryDto dto = new HistoryDto(goods);
-//			history.add(dto);
-//		});
 
 		return gson.toJson(history);
 	}
