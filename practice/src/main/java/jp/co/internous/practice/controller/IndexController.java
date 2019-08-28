@@ -23,7 +23,7 @@ import jp.co.internous.practice.model.mapper.PurchaseMapper;
 import jp.co.internous.practice.model.mapper.UserMapper;
 
 @Controller
-@RequestMapping("/myshop")
+@RequestMapping("/practice")
 public class IndexController {
 	
 	@Autowired
